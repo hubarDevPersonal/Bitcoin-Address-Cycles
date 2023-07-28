@@ -14,22 +14,22 @@ var (
 					},
 					{
 						TxHash:  "hash1",
-						Index:   0,
+						Index:   1,
 						Address: "addrB",
 					},
 					{
 						TxHash:  "hash2",
-						Index:   0,
+						Index:   2,
 						Address: "addrC",
 					},
 					{
 						TxHash:  "hash3",
-						Index:   0,
+						Index:   3,
 						Address: "addrB",
 					},
 					{
 						TxHash:  "hash4",
-						Index:   0,
+						Index:   4,
 						Address: "addrA",
 					},
 				},
@@ -42,30 +42,30 @@ var (
 			{
 				Inputs: []*rpc.Vertex{
 					{
-						TxHash:  "hash0",
+						TxHash:  "hash",
 						Index:   0,
 						Address: "addrA",
 					},
 					{
-						TxHash:  "hash1",
-						Index:   0,
+						TxHash:  "hash",
+						Index:   1,
 						Address: "addrB",
 					},
 					{
-						TxHash:  "hash2",
-						Index:   0,
+						TxHash:  "hash",
+						Index:   2,
 						Address: "addrC",
 					},
 				},
 				Outputs: []*rpc.Vertex{
 					{
-						TxHash:  "hash5",
-						Index:   0,
+						TxHash:  "hash",
+						Index:   5,
 						Address: "addrA",
 					},
 					{
-						TxHash:  "hash6",
-						Index:   0,
+						TxHash:  "hash",
+						Index:   6,
 						Address: "addrA",
 					},
 				},
@@ -73,20 +73,20 @@ var (
 			{
 				Inputs: []*rpc.Vertex{
 					{
-						TxHash:  "hash3",
-						Index:   0,
-						Address: "addrB",
+						TxHash:  "hash",
+						Index:   3,
+						Address: "addr",
 					},
 					{
-						TxHash:  "hash4",
-						Index:   0,
+						TxHash:  "hash",
+						Index:   4,
 						Address: "addrA",
 					},
 				},
 				Outputs: []*rpc.Vertex{
 					{
-						TxHash:  "hash7",
-						Index:   0,
+						TxHash:  "hash",
+						Index:   7,
 						Address: "addrA",
 					},
 				},
@@ -99,30 +99,30 @@ var (
 			{
 				Inputs: []*rpc.Vertex{
 					{
-						TxHash:  "hash5",
-						Index:   0,
+						TxHash:  "hash",
+						Index:   5,
 						Address: "addrA",
 					},
 					{
-						TxHash:  "hash6",
-						Index:   0,
+						TxHash:  "hash",
+						Index:   6,
 						Address: "addrA",
 					},
 					{
-						TxHash:  "hash7",
-						Index:   0,
+						TxHash:  "hash",
+						Index:   7,
 						Address: "addrA",
 					},
 				},
 				Outputs: []*rpc.Vertex{
 					{
-						TxHash:  "hash8",
-						Index:   0,
+						TxHash:  "hash",
+						Index:   8,
 						Address: "addrA",
 					},
 					{
-						TxHash:  "hash9",
-						Index:   0,
+						TxHash:  "hash",
+						Index:   9,
 						Address: "addrB",
 					},
 				},
