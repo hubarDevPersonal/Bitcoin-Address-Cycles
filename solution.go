@@ -8,20 +8,24 @@ import (
 	"os"
 )
 
+// Block is a collection of transactions.
 type Block struct {
 	Transactions []*rpc.Transaction
 }
 
+// Graph is a collection of blocks.
 type Graph struct {
 	Blocks []*Block
 }
 
+// SolutionServer is the server that implements the SolutionServer interface.
 type SolutionServer struct {
 	rpc.UnimplementedSolutionServer
 	l             *log.Logger
 	BlockchainDAG *Graph
 }
 
+// NewSolutionServer creates a new instance of the SolutionServer.
 func NewSolutionServer() *SolutionServer {
 	return &SolutionServer{
 		BlockchainDAG: &Graph{},
@@ -53,21 +57,25 @@ func (s *SolutionServer) MineBlock(ctx context.Context, request *rpc.MineBlockRe
 // Address cycle is a path in the graph from one vertex to the other with the same address.
 func (s *SolutionServer) CountCycles(ctx context.Context, request *rpc.CountCyclesRequest) (*rpc.CountCyclesResponse, error) {
 	var numberOfCycles int64 = 0
+	//Check if the block numbers are valid
 	if request.FromBlock < 0 || request.ToBlock < 0 {
 		s.l.Println("Error: invalid block number")
 		return &rpc.CountCyclesResponse{NCycles: numberOfCycles}, fmt.Errorf("invalid block number")
 	}
 
+	//Check if the block range is valid
 	if request.FromBlock >= request.ToBlock {
 		s.l.Println("Error: invalid block range")
 		return &rpc.CountCyclesResponse{NCycles: numberOfCycles}, fmt.Errorf("invalid block range")
 	}
 
+	//Check if the max cycle length is valid
 	if request.MaxCycleLength <= 0 {
 		s.l.Println("Error: invalid max cycle length")
 		return &rpc.CountCyclesResponse{NCycles: numberOfCycles}, fmt.Errorf("invalid max cycle length")
 	}
 
+	// Initialize a map to keep track of visited vertices
 	visited := make(map[int64]bool)
 
 	// Iterate through all blocks in the specified range
@@ -109,7 +117,7 @@ func (s *SolutionServer) findCycleDFS(startVertex *rpc.Vertex, currentVertex *rp
 			for _, input := range transaction.Inputs {
 				if input.Index == currentVertex.Index {
 					// The transaction has the currentVertex as an input.
-					// Now, search for vertices in the transaction's outputs with the same address.
+					// Search for vertices in the transaction's outputs with the same address.
 					for _, output := range transaction.Outputs {
 						if output.Address == startVertex.Address {
 							// Found a cycle! Increment the cycle count

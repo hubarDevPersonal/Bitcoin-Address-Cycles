@@ -23,10 +23,6 @@ func TestCountCycles(t *testing.T) {
 		fromBlock, toBlock, maxCycleLength int64
 		expectedCycles                     int64
 	}{
-		//{0, 0, 1, 0},
-		//{0, 1, 1, 3},
-		//{0, 1, 0, 0},
-		//{1, 1, 1, 0},
 		{0, 2, 2, 12},
 		{0, 2, 1, 6},
 		{1, 2, 1, 3},
@@ -124,6 +120,4 @@ func TestMineBlock(t *testing.T) {
 		// Modify the conditions below based on your actual implementation's behavior
 		assert.Equal(t, testServer.BlockchainDAG.Blocks[0].Transactions[0].Inputs[0].Address, "addrA")
 	})
-
-	// Add more test cases as needed to cover other scenarios and edge cases.
 }
