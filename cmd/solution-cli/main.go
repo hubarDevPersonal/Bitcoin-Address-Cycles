@@ -2,12 +2,13 @@ package main
 
 import (
 	"context"
-	"golang-test-task/rpc"
 	"log"
 	"time"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+
+	"bitcoin-address-cycles/rpc"
 )
 
 // This is used just to check that server actually responses to client requests.

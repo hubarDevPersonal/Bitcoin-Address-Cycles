@@ -1,17 +1,18 @@
 package main
 
 import (
-	"golang-test-task"
-	"golang-test-task/rpc"
 	"log"
 	"net"
 
 	"google.golang.org/grpc"
+
+	"bitcoin-address-cycles"
+	"bitcoin-address-cycles/rpc"
 )
 
 // Start the server.
 func main() {
-	solutionServer := golang_test_task.NewSolutionServer()
+	solutionServer := bitcoin_address_cycles.NewSolutionServer()
 	grpcServer := grpc.NewServer()
 	rpc.RegisterSolutionServer(grpcServer, solutionServer)
 
