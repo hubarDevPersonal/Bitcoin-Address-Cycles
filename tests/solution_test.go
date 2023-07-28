@@ -1,13 +1,13 @@
 package tests
 
 import (
-	"bitcoin-address-cycles"
 	"context"
 	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 
+	"bitcoin-address-cycles"
 	"bitcoin-address-cycles/rpc"
 )
 
