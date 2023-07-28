@@ -50,6 +50,34 @@ func TestCountCycles(t *testing.T) {
 	}
 }
 
+func TestNegativeCountCycles(t *testing.T) {
+	ctx := context.Background()
+	testServer := bitcoin_address_cycles.NewSolutionServer()
+	_, _ = testServer.MineBlock(ctx, transactionsFromBlock0)
+	_, _ = testServer.MineBlock(ctx, transactionsFromBlock1)
+	_, _ = testServer.MineBlock(ctx, transactionsFromBlock2)
+
+	// Test data
+	testCases := []struct {
+		fromBlock, toBlock, maxCycleLength int64
+		expectedError                      error
+	}{
+		{0, 0, 1, fmt.Errorf("invalid block range")},
+		{0, 1, 0, fmt.Errorf("invalid max cycle length")},
+	}
+
+	for _, tc := range testCases {
+		req := &rpc.CountCyclesRequest{
+			FromBlock:      tc.fromBlock,
+			ToBlock:        tc.toBlock,
+			MaxCycleLength: tc.maxCycleLength,
+		}
+
+		_, err := testServer.CountCycles(ctx, req) // Replace CountCycles with the actual function name
+		assert.Equal(t, err, tc.expectedError)
+	}
+}
+
 func TestMineBlock(t *testing.T) {
 	// Test case 1: Empty transactions
 	t.Run("EmptyTransactions", func(t *testing.T) {
@@ -57,16 +85,11 @@ func TestMineBlock(t *testing.T) {
 		// For this example, let's assume we have a variable `graph` of type `Graph`
 		ctx := context.Background()
 		testServer := bitcoin_address_cycles.NewSolutionServer()
-		// Create an empty transactions slice
 
 		// Call the MineBlock function
-		_, _ = testServer.MineBlock(ctx, transactionsFromBlock0)
-		_, _ = testServer.MineBlock(ctx, transactionsFromBlock1)
-		_, _ = testServer.MineBlock(ctx, transactionsFromBlock2)
+		_, err := testServer.MineBlock(ctx, emptyTransactions)
 
-		// Perform the necessary checks based on your logic
-		// For this example, we assume that MineBlock returns -1 when the transactions slice is empty
-		fmt.Println(testServer.BlockchainDAG)
+		assert.Equal(t, err, fmt.Errorf("empty transactions"))
 	})
 
 	// Test case 2: Transactions with valid data
@@ -99,7 +122,7 @@ func TestMineBlock(t *testing.T) {
 		// Perform the necessary checks based on your logic
 		// For this example, we assume that MineBlock returns 0 when successful
 		// Modify the conditions below based on your actual implementation's behavior
-		fmt.Println(testServer.BlockchainDAG.Blocks[0].Transactions[0].Inputs[0].Address)
+		assert.Equal(t, testServer.BlockchainDAG.Blocks[0].Transactions[0].Inputs[0].Address, "addrA")
 	})
 
 	// Add more test cases as needed to cover other scenarios and edge cases.

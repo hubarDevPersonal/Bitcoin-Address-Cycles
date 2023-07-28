@@ -3,6 +3,9 @@ package tests
 import "bitcoin-address-cycles/rpc"
 
 var (
+	emptyTransactions = &rpc.MineBlockRequest{
+		Txs: []*rpc.Transaction{},
+	}
 	transactionsFromBlock0 = &rpc.MineBlockRequest{
 		Txs: []*rpc.Transaction{
 			{
